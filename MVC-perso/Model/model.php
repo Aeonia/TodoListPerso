@@ -119,3 +119,17 @@ function connectmember($login, $password)
 	  return $loginpwd;
 }
 }
+
+function addNewMember($login, $password) {
+	$pdo_statement = prepareStatement(
+		'INSERT INTO User (login, password) VALUES (:login, :password)');
+
+	if (
+	  $pdo_statement &&
+	  $pdo_statement->bindParam(':login', $login) &&
+	  $pdo_statement->bindParam(':password', $password) &&
+	  $pdo_statement->execute()
+	 ) {
+	 	return $pdo_statement;
+   }  
+}
